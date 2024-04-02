@@ -13,7 +13,7 @@ driver.get('https://www.tiktok.com/legal/report/Copyright')
 
 
 
-email = driver.find_element(By.CSS_SELECTOR, '#tux-61912_input')
+email = driver.find_element(By.CSS_SELECTOR, '#tux-70191_input') # er b tiktok 💗
 email.send_keys('bahsa.leb@gmail.com')
 
 #email = driver.find_element(By.CSS_SELECTOR, '#tux-61912_input')
