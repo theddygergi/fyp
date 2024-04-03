@@ -9,8 +9,18 @@ driver = webdriver.Chrome()
 
 driver.get('https://www.google.com/recaptcha/api2/demo')
 
-not_bot_btn = driver.find_element(By.CLASS_NAME, '/html/body/div[2]/div[3]/div[2]/div/label/span')
-not_bot_btn.click()
+time.sleep(5)
 
+recaptcha_iframe = driver.find_element(By.CSS_SELECTOR, "iframe[src^='https://www.google.com/recaptcha']")
+driver.switch_to.frame(recaptcha_iframe)
 
+# Find and click on the reCAPTCHA checkbox
+checkbox = driver.find_element(By.CSS_SELECTOR, ".recaptcha-checkbox-border")
+checkbox.click()
 
+# Wait for the audio button to be clickable
+audio_button = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="rc-imageselect"]/div[3]/div[2]/div[1]/div[1]/div[2]')))
+audio_button.click()
+
+# Switch back to the default content
+driver.switch_to.default_content()
