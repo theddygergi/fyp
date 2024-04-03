@@ -6,23 +6,36 @@ import time
 import undetected_chromedriver as webdriver
 
 driver = webdriver.Chrome()
-
 driver.get('https://www.google.com/recaptcha/api2/demo')
-
 time.sleep(5)
 
-recaptcha_iframe = driver.find_element(By.CSS_SELECTOR, "iframe[src^='https://www.google.com/recaptcha']")
+# Switch to the reCAPTCHA iframe
+recaptcha_iframe = driver.find_element(By.CSS_SELECTOR, "iframe[src*='recaptcha']")
 driver.switch_to.frame(recaptcha_iframe)
 
-# Find and click on the reCAPTCHA checkbox
+# Click the reCAPTCHA checkbox
 checkbox = driver.find_element(By.CSS_SELECTOR, ".recaptcha-checkbox-border")
 checkbox.click()
 
-# Wait for the audio button to be clickable
-audio_button = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="rc-imageselect"]/div[3]/div[2]/div[1]/div[1]/div[2]')))
-audio_button.click()
+# Wait for the audio challenge button to be present and clickable
+audio_challenge_button = WebDriverWait(driver, 20).until(
+    EC.element_to_be_clickable((By.ID, "recaptcha-audio-button"))
+)
+
+# Click the audio challenge button
+audio_challenge_button.click()
+
+# Wait for the audio challenge to load
+audio_source = WebDriverWait(driver, 20).until(
+    EC.presence_of_element_located((By.ID, "audio-source"))
+)
+
+# Get the audio source URL
+audio_url = audio_source.get_attribute("src")
+
+# Handle the audio challenge
+# ...
+# (Additional code to handle the audio challenge using the audio_url)
 
 # Switch back to the default content
 driver.switch_to.default_content()
-
-#still need to 
