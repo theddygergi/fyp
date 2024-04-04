@@ -16,13 +16,13 @@ time.sleep(12)
 password = driver.find_element(By.XPATH, '//*[@id="login-password"]')
 password.send_keys("random1$A" + Keys.ENTER)
 
-#time.sleep(2)
+time.sleep(2)
 
-#WebDriverWait(driver, 12).until(
-#    EC.presence_of_element_located((By.XPATH, '/html/body/shreddit-app/shreddit-overlay-display//shreddit-signup-drawer//shreddit-drawer/div/shreddit-async-loader/div/shreddit-slotter//span/shreddit-async-loader/auth-flow-login/faceplate-form/faceplate-tabpanel/auth-flow-modal[1]/div[2]'))
-#)
-#login = driver.find_element(By.XPATH, '/html/body/shreddit-app/shreddit-overlay-display//shreddit-signup-drawer//shreddit-drawer/div/shreddit-async-loader/div/shreddit-slotter//span/shreddit-async-loader/auth-flow-login/faceplate-form/faceplate-tabpanel/auth-flow-modal[1]/div[2]')
-#login.click()
+WebDriverWait(driver, 12).until(
+    EC.presence_of_element_located((By.XPATH, '/html/body/shreddit-app/shreddit-overlay-display//shreddit-signup-drawer//shreddit-drawer/div/shreddit-async-loader/div/shreddit-slotter//span/shreddit-async-loader/auth-flow-login/faceplate-form/faceplate-tabpanel/auth-flow-modal[1]/div[2]'))
+)
+login = driver.find_element(By.XPATH, '/html/body/shreddit-app/shreddit-overlay-display//shreddit-signup-drawer//shreddit-drawer/div/shreddit-async-loader/div/shreddit-slotter//span/shreddit-async-loader/auth-flow-login/faceplate-form/faceplate-tabpanel/auth-flow-modal[1]/div[2]')
+login.click()
 
 time.sleep(15)
 
