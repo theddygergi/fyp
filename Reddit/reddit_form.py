@@ -8,6 +8,7 @@ import time
 driver = webdriver.Firefox()
 driver.get("https://www.reddit.com/report")
 
+
 email = driver.find_element(By.XPATH, '/html/body/shreddit-app/shreddit-overlay-display/span[4]/input')
 email.send_keys("michael.me2@hotmail.com")
 
