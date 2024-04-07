@@ -13,11 +13,8 @@ driver.get('https://www.tiktok.com/legal/report/Copyright')
 
 
 
-email = driver.find_element(By.CSS_SELECTOR, '#tux-70191_input')
+email = driver.find_element(By.TAG_NAME, 'input')
 email.send_keys('bahsa.leb@gmail.com')
-
-#email = driver.find_element(By.CSS_SELECTOR, '#tux-61912_input')
-#email.send_keys('bahsa.leb@gmail.com')
 
 
 time.sleep(5)
@@ -108,14 +105,9 @@ desc_text.send_keys("This person stole my content without my permission ya haywe
 
 time.sleep(5)
 
-#try:
-upload_btn = driver.find_element(By.XPATH, '//*[@id="input-file-authorizations"]')
-pyautogui.write("ss.jpg")
-pyautogui.press('enter')
-
-#except :
-    #pass
-
+upload_btn = driver.find_element(By.XPATH, '/html/body/div[3]/main/form/div[16]/div/label')
+image_path="D:/FYP/fyp/TikTok/ss.png"
+upload_btn.send_keys(image_path)
 
 
 time.sleep(4)
