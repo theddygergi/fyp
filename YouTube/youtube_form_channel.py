@@ -4,9 +4,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
-import undetected_chromedriver as uc
 
-driver=uc.Chrome()
+driver=webdriver.Firefox()
 driver.get('https://studio.youtube.com/channel/UCbPWlmdoVIiRpomlDEIrvVQ/copyright/history')
 
 time.sleep(3)
@@ -20,7 +19,6 @@ Next_button=driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div[2]/c-wiz
 Next_button.click()
 
 time.sleep(5)
-
 password = driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div[2]/c-wiz/div/div[2]/div/div/div/form/span/section[2]/div/div/div[1]/div[1]/div/div/div/div/div[1]/div/div[1]/input')
 password.send_keys("1q2w3e4r5t!@#$%")
 
@@ -66,12 +64,12 @@ opt1_add_vid.click()
 
 time.sleep(2)
 
-opt1_select = driver.find_element(By.CSS_SELECTOR ,'')
+opt1_select = driver.find_element(By.XPATH ,'//*[@id="right-icon"]')
 opt1_add_vid.click()
 
 time.sleep(5)
 
-other_opt = driver.find_element(By.XPATH, '/html/body/ytcr-unified-form/ytcp-modal-dialog/tp-yt-paper-dialog/div/tp-yt-paper-dialog-scrollable/div/div/div[2]/div[2]/ytcr-manual-entry/div[2]/div/ytcp-form-select/ytcp-select/ytcp-text-dropdown-trigger/ytcp-dropdown-trigger/div/div[2]')
+other_opt = driver.find_element(By.XPATH, '//*[@id="text-item-7"]/ytcp-ve/tp-yt-paper-item-body/div/div')
 other_opt.click()
 
 time.sleep(4)

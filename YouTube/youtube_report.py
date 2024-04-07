@@ -29,12 +29,12 @@ for row in worksheet.iter_rows(min_row=1, max_row=worksheet.max_row):
     time.sleep(2)
 
     title = driver.find_element(By.XPATH, '//*[@id="Title"]')
-    title.send_keys("St")
+    title.send_keys("Mr")
 
     time.sleep(2)
 
     company_name = driver.find_element(By.XPATH, '//*[@id="CompanyName"]')
-    company_name.send_keys("UL")
+    company_name.send_keys("First Bank Nigeria")
 
     time.sleep(2)
 
@@ -44,7 +44,7 @@ for row in worksheet.iter_rows(min_row=1, max_row=worksheet.max_row):
     time.sleep(2)
 
     relationship = driver.find_element(By.XPATH, '//*[@id="OwnerRelationship"]')
-    relationship.send_keys("Work")
+    relationship.send_keys("I am reporting on behalf of my organization or client.")
 
     time.sleep(2)
 
@@ -75,8 +75,8 @@ for row in worksheet.iter_rows(min_row=1, max_row=worksheet.max_row):
 
     time.sleep(2)
 
-    no_i_claim = driver.find_element(By.XPATH, '/html/body/div[2]/div/section/div/div/article/form/div[14]/fieldset/div[2]/div')
-    no_i_claim.click()
+    yes = driver.find_element(By.XPATH, '//*[@id="trademark_complaint"]/div[14]/fieldset/div[1]/div/label/div[1]')
+    yes.click()
 
     time.sleep(2)
 
@@ -95,8 +95,8 @@ for row in worksheet.iter_rows(min_row=1, max_row=worksheet.max_row):
 
     time.sleep(2)
 
-    lebanon = driver.find_element(By.XPATH, '//*[@id=":145"]')
-    lebanon.click()
+    nigeria = driver.find_element(By.XPATH, '//*[@id=":181"]')
+    nigeria.click()
 
     time.sleep(2)
 
@@ -125,7 +125,7 @@ for row in worksheet.iter_rows(min_row=1, max_row=worksheet.max_row):
     time.sleep(2)
 
     desc = driver.find_element(By.XPATH, '//*[@id="AllegedlyInfringed"]')
-    desc.send_keys("These channels stole the logo of the organization without permission and used it in all of their videos. Please Consider this report.")
+    desc.send_keys("This channel stole the logo of the organization without permission and used it in all of their videos. Please consider this report.")
 
     time.sleep(2)
 
@@ -153,7 +153,7 @@ for row in worksheet.iter_rows(min_row=1, max_row=worksheet.max_row):
     submit_btn.click()
 
     time.sleep(3)
-
+                
     driver.quit()
 
     time.sleep(150)
