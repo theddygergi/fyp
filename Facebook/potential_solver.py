@@ -31,7 +31,7 @@ def saveFile(content,filename):
         for data in content.iter_content():
             handle.write(data)
 
-driver = uc.Chrome()
+driver = webdriver.Chrome(option)
 time.sleep(1)
 googleClass = driver.find_elements(By.CLASS_NAME, 'g-recaptcha')[0]
 time.sleep(2)
