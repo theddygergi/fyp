@@ -40,7 +40,7 @@ def get_outlook_otp(username, password):
     else:
         body = message.get_payload(decode=True).decode()
  
-    print(body)
+    #print(body)
     # Close the connection
     mail.close()
     mail.logout()
@@ -54,5 +54,5 @@ def get_outlook_otp(username, password):
         return six_digit_numbers[4]
     else:
         return None
-    
+
 print(get_outlook_otp("michael.me2@hotmail.com","random1$A"))
