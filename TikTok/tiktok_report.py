@@ -16,6 +16,9 @@ driver.get('https://www.tiktok.com/legal/report/Copyright')
 email = driver.find_element(By.TAG_NAME, 'input')
 email.send_keys('bahsa.leb@gmail.com')
 
+email = driver.find_element(By.TAG_NAME, 'input')
+email.send_keys('bahsa.leb@gmail.com')
+
 
 time.sleep(5)
 
@@ -37,11 +40,11 @@ problem_selection.click()
 time.sleep(5)
 
 WebDriverWait(driver, 5).until(
-    EC.presence_of_element_located ((By.CLASS_NAME , 'css-1o2kt1p'))
+    EC.presence_of_element_located ((By.ID , 'tux-2_list_1'))
 )
 
 
-subproblem_selection = driver.find_element(By.CLASS_NAME, 'css-1o2kt1p')
+subproblem_selection = driver.find_element(By.ID, 'tux-2_list_1')
 subproblem_selection.click()
 
 time.sleep(5)
@@ -51,22 +54,22 @@ affected.click()
 
 time.sleep(4)
 WebDriverWait(driver , 5).until(
-    EC.presence_of_element_located((By.XPATH, '//*[@id="tux-4_list_1"]'))
+    EC.presence_of_element_located((By.ID, 'tux-4_list_4'))
 )
 
-affected_select = driver.find_element(By.XPATH, '//*[@id="tux-4_list_1"]')
+affected_select = driver.find_element(By.ID, 'tux-4_list_4')
 affected_select.click()
 
 time.sleep(4)
 
 
 full_name = driver.find_element(By.XPATH, '//*[@id="tux-6_input"]')
-full_name.send_keys("Bahsa Leb")
+full_name.send_keys("Bahsa Lebron")
 
 time.sleep(5)
 
 copyright_owner_name = driver.find_element(By.XPATH, '//*[@id="tux-7_input"]')
-copyright_owner_name.send_keys("Edz")
+copyright_owner_name.send_keys("maguybghosn")
 
 time.sleep(4)
 
@@ -85,35 +88,39 @@ option.click()
 
 time.sleep(2)
 
-copyright_src = driver.find_element(By.XPATH , '//*[@id="My personal TikTok account"]')
+copyright_src = driver.find_element(By.XPATH , '/html/body/div[3]/main/form/div[12]/div/div[2]/label/span')
 copyright_src.click()
 
 time.sleep(4)
 
-url_text1 = driver.find_element(By.XPATH , '//*[@id="tux-26_input"]')
-url_text1.send_keys("https://vt.tiktok.com/ZSFUArf2c/")
+url_text1 = driver.find_element(By.XPATH , '//*[@id="tux-26_input"]') #content to report
+url_text1.send_keys("https://vt.tiktok.com/ZSFpqtJer/")
 
 time.sleep(4)
 
-url_text2 = driver.find_element(By.XPATH , '//*[@id="tux-27_textArea"]')
-url_text2.send_keys("https://vt.tiktok.com/ZSFUArf2c/")
+url_text2 = driver.find_element(By.XPATH , '//*[@id="tux-27_textArea"]') #original
+url_text2.send_keys("https://vt.tiktok.com/ZSFpbrYa5/")
 
 time.sleep(4)
 
 desc_text = driver.find_element(By.XPATH , '//*[@id="tux-28_input"]')
-desc_text.send_keys("This person stole my content without my permission ya haywen!! 🐎")
+desc_text.send_keys("This account stole maguybghosn's video without her permission. Please consider this report.")
 
 time.sleep(5)
 
 upload_btn = driver.find_element(By.XPATH, '/html/body/div[3]/main/form/div[16]/div/label')
-image_path="D:/FYP/fyp/TikTok/ss.png"
-upload_btn.send_keys(image_path)
+upload_btn.click()
+time.sleep(1)
+pyautogui.write("ss.jpg")
+pyautogui.press('enter')
+assert WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".file"))).text == "ss.jpg"
+
 
 
 time.sleep(4)
 
 url_text3 = driver.find_element(By.XPATH , '//*[@id="tux-20_textArea"]')
-url_text3.send_keys("https://vt.tiktok.com/ZSFUArf2c/")
+url_text3.send_keys("https://vt.tiktok.com/ZSFpbrYa5/") #original
 
 time.sleep(5)
 
@@ -139,12 +146,14 @@ third_opt.click()
 time.sleep(5)
 
 signature = driver.find_element(By.ID , 'tux-25_input')
-signature.send_keys("Bahsa Leb")
+signature.send_keys("Bahsa Lebron")
 
 time.sleep(5)
 
 send_btn = driver.find_element(By.XPATH, '/html/body/div[3]/main/form/button')
 send_btn.click()
 
-time.sleep(100)
+driver.quit()
+
+
 
