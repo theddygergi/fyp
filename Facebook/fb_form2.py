@@ -11,7 +11,7 @@ import requests
 import os
 import convert
 import speech_rec
-
+#from captcha_solver_class import CaptchaSolver
 def audioToText(mp3Path):
     newmp3=convert.convert_mp3_to_wav(mp3Path, "audio.wav")
     result=speech_rec.transcribe_wav("audio.wav")
@@ -34,12 +34,12 @@ option.add_argument("user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac
 driver = uc.Chrome(option)
 driver.get("https://facebook.com")
 
-WebDriverWait(driver, 15).until(
-    EC.presence_of_element_located((By.XPATH, '/html/body/div[3]/div[2]/div/div/div/div/div[4]/button[2]'))
-)
-
-allow_cookies = driver.find_element(By.XPATH, '/html/body/div[3]/div[2]/div/div/div/div/div[4]/button[2]')
-allow_cookies.click()
+#WebDriverWait(driver, 15).until(
+#    EC.presence_of_element_located((By.XPATH, '/html/body/div[3]/div[2]/div/div/div/div/div[4]/button[2]'))
+#)
+#
+#allow_cookies = driver.find_element(By.XPATH, '/html/body/div[3]/div[2]/div/div/div/div/div[4]/button[2]')
+#allow_cookies.click()
 
 
 # Find email and password fields and enter credentials
@@ -171,49 +171,82 @@ input_otp.send_keys(OTP_code)
 confirm_button = driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div/div/form/div[3]/button")
 confirm_button.click()
 
-time.sleep(40)
+time.sleep(5000)
 
-WebDriverWait(driver, 30).until(
-    EC.presence_of_element_located((By.CSS_SELECTOR, "iframe[src^='https://www.google.com/recaptcha']"))
-)
+# your existing code
 
-# Locate the reCAPTCHA iframe and extract the audio challenge
-iframe = driver.find_element(By.CSS_SELECTOR, "iframe[src^='https://www.google.com/recaptcha']")
-driver.switch_to.frame(iframe)
-audioBtn = driver.find_element(By.ID, 'recaptcha-audio-button')
-audioBtn.click()
+# Get all window handles
+all_handles = driver.window_handles
 
-# Wait for the audio challenge to load
-time.sleep(2)
+# Iterate through each window handle
+for handle in all_handles:
+    try:
+        # Switch to the window
+        driver.switch_to.window(handle)
+        
+        # Check if the reCAPTCHA element is present
+        googleClass = driver.find_element(By.CLASS_NAME, 'g-recaptcha')
 
-# Extract the audio challenge URL
-audio_source = driver.find_element(By.ID, 'audio-source').get_attribute('src')
-
-# Download the audio challenge
-response = requests.get(audio_source, stream=True)
-saveFile(response, filename)
-
-# Convert the audio challenge to text
-response_text = audioToText(os.getcwd() + '/' + filename)
-print("Audio Challenge:", response_text)
-
-# Enter the text response in the input field and submit
-input_field = driver.find_element(By.ID, 'audio-response')
-input_field.send_keys(response_text)
-input_field.send_keys(Keys.ENTER)
-
-# Wait for the response to be validated
-time.sleep(2)
-
-# Check if there are any error messages
-error_message = driver.find_elements(By.CLASS_NAME, 'rc-audiochallenge-error-message')[0].text
-if not error_message:
-    print("Success")
+        break
+    except Exception:
+        continue
 else:
-    print("Error:", error_message)
+    print("Error: Could not find the reCAPTCHA element in any window")
 
-# Switch back to the default content
-driver.switch_to.default_content()
+ 
+
+googleClass = driver.find_element(By.CLASS_NAME, 'g-recaptcha')
+time.sleep(4)
+outeriframe = googleClass.find_element(By.TAG_NAME,'iframe')
+time.sleep(2)
+outeriframe.click()
+time.sleep(4)
+allIframesLen = driver.find_elements(By.TAG_NAME,'iframe')
+time.sleep(2)
+audioBtnFound = False
+audioBtnIndex = -1
+
+for index in range(len(allIframesLen)):
+    driver.switch_to.default_content()
+    iframe = driver.find_elements(By.TAG_NAME,'iframe')[index]
+    driver.switch_to.frame(iframe)
+    driver.implicitly_wait(delayTime)
+    try:
+        audioBtn = driver.find_element(By.ID,'recaptcha-audio-button') or driver.find_element(By.ID,'recaptcha-anchor')
+        audioBtn.click()
+        audioBtnFound = True
+        audioBtnIndex = index
+        break
+    except Exception as e:
+        pass
+
+if audioBtnFound:
+    try:
+        while True:
+            href = driver.find_element(By.ID,'audio-source').get_attribute('src')
+            response = requests.get(href, stream=True)
+            saveFile(response,filename)
+            response = audioToText(os.getcwd() + '/' + filename)
+            print(response)
+            driver.switch_to.default_content()
+            iframe = driver.find_elements(By.TAG_NAME,'iframe')[audioBtnIndex]
+            driver.switch_to.frame(iframe)
+            inputbtn = driver.find_element(By.ID,'audio-response')
+            inputbtn.send_keys(response)
+            inputbtn.send_keys(Keys.ENTER)
+            time.sleep(2)
+            errorMsg = driver.find_elements(By.CLASS_NAME,'rc-audiochallenge-error-message')[0]
+            if errorMsg.text == "" or errorMsg.value_of_css_property('display') == 'none':
+                print("Success")
+                break
+    except Exception as e:
+        print(e)
+else:
+    print('Button not found. This should not happen.')
+
+
+#captcha_solver = CaptchaSolver()
+#captcha_solver.solveCaptcha()
 
 # Close the driver
 driver.quit()

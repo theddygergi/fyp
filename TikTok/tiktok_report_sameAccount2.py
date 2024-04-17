@@ -8,16 +8,9 @@ import pyautogui
 import openpyxl
 import tiktok_verification
 
-#with verification and many accounts
+#without verification and one account with many reports
 
-workbook = openpyxl.load_workbook("C:/Users/eddyg/Desktop/FYP/GitHub/fyp/TikTok/email_password.xlsx")
-worksheet = workbook.active
- 
-for row in worksheet.iter_rows(min_row=1, max_row=worksheet.max_row):
-    # Extract name and email from each row
-    name = row[0].value
-    email = row[1].value
-    password = row[2].value
+for _ in range(5):
 
     driver = webdriver.Firefox()
     driver.get('https://www.tiktok.com/legal/report/Copyright')
@@ -25,39 +18,20 @@ for row in worksheet.iter_rows(min_row=1, max_row=worksheet.max_row):
 
     emailTxt = driver.find_element(By.TAG_NAME, 'input')
     time.sleep(2)
-    emailTxt.send_keys(email)
-
+    emailTxt.send_keys("samira_raad2000@outlook.com")
 
     time.sleep(5)
 
     next_btn = driver.find_element(By.CSS_SELECTOR , 'body > div.base-layout-container > main > article > div > form > button')
     next_btn.click()
 
-    #time.sleep(20)
+    time.sleep(6)
 
-    #url = tiktok_verification.get_outlook_otp(email,password)
-    #driver.execute_script("window.open('about:blank', '_blank');")
-    #new_tab = driver.window_handles[-1]
-    #driver.switch_to.window(new_tab)
-    #driver.get(url)  # Replace this URL with the one you want
-#
-    ## Wait for 10 seconds
-    #time.sleep(10)
-#
-    ## Close the current tab
-    #driver.close()
-#
-    ## Switch back to the original tab
-    #driver.switch_to.window(driver.window_handles[0])
-#
-    #time.sleep(10)
-    #done_btn = driver.find_element(By.CSS_SELECTOR, 'button.submit-button:nth-child(5)')
-    #done_btn.click()
-    #WebDriverWait(driver , 5).until(
-    #    EC.presence_of_element_located((By.CLASS_NAME, 'css-1mu1jn5'))
-    #)
-#
-    time.sleep(10)
+
+    WebDriverWait(driver , 5).until(
+        EC.presence_of_element_located((By.CLASS_NAME, 'css-1mu1jn5'))
+    )
+
     problem_selection = driver.find_element(By.CLASS_NAME , 'css-1mu1jn5')
     problem_selection.click()
 
@@ -88,7 +62,7 @@ for row in worksheet.iter_rows(min_row=1, max_row=worksheet.max_row):
 
 
     full_name = driver.find_element(By.XPATH, '//*[@id="tux-6_input"]')
-    full_name.send_keys(name)
+    full_name.send_keys("Samira Raad")
 
     time.sleep(5)
 
@@ -98,21 +72,21 @@ for row in worksheet.iter_rows(min_row=1, max_row=worksheet.max_row):
     time.sleep(4)
 
     physical_address = driver.find_element(By.XPATH , '//*[@id="tux-8_input"]')
-    physical_address.send_keys("Georgia")
+    physical_address.send_keys("Georgia Street")
 
     time.sleep(4)
 
     phone_nb = driver.find_element(By.XPATH, '//*[@id="tux-9_input"]')
-    phone_nb.send_keys("+995577208104")
+    phone_nb.send_keys("+995577208102")
 
     time.sleep(5)
 
-    option = driver.find_element(By.XPATH, '//*[@id="Video"]')
+    option = driver.find_element(By.XPATH, '//*[@id="Photo / Picture"]')
     option.click()
 
     time.sleep(2)
 
-    copyright_src = driver.find_element(By.XPATH , '/html/body/div[3]/main/form/div[12]/div/div[2]/label/span')
+    copyright_src = driver.find_element(By.XPATH , '/html/body/div[3]/main/form/div[12]/div/div[2]/div')
     copyright_src.click()
 
     time.sleep(4)
@@ -152,7 +126,6 @@ for row in worksheet.iter_rows(min_row=1, max_row=worksheet.max_row):
     #prevent_btn = driver.find_element(By.XPATH, '/html/body/div[3]/main/form/div[16]/div/div/div/input')
     #prevent_btn.click()
 
-    time.sleep(5)
 
     first_opt = driver.find_element(By.XPATH, '/html/body/div[3]/main/form/div[23]/div/div[1]/div')
     first_opt.click()
@@ -170,7 +143,7 @@ for row in worksheet.iter_rows(min_row=1, max_row=worksheet.max_row):
     time.sleep(5)
 
     signature = driver.find_element(By.ID , 'tux-25_input')
-    signature.send_keys(name)
+    signature.send_keys("Samira Raad")
 
     time.sleep(5)
 
@@ -182,13 +155,11 @@ for row in worksheet.iter_rows(min_row=1, max_row=worksheet.max_row):
     done_btn = driver.find_element(By.XPATH, '/html/body/div[3]/main/article/div/div/button')
     done_btn.click()
 
-    time.sleep(5)
+    time.sleep(2)
     
     driver.quit()
 
-    driver.quit()
-
-    time.sleep(20)
+    time.sleep(30)
 
 
 

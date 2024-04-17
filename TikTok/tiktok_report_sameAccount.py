@@ -86,7 +86,7 @@ for _ in range(5):
 
     time.sleep(2)
 
-    copyright_src = driver.find_element(By.XPATH , '/html/body/div[2]/main/form/div[11]/div/div[1]/label/span')
+    copyright_src = driver.find_element(By.XPATH , '/html/body/div[3]/main/form/div[12]/div/div[2]/div')
     copyright_src.click()
 
     time.sleep(4)
@@ -151,6 +151,13 @@ for _ in range(5):
     send_btn = driver.find_element(By.XPATH, '/html/body/div[3]/main/form/button')
     send_btn.click()
 
+    time.sleep(10)
+
+    done_btn = driver.find_element(By.XPATH, '/html/body/div[3]/main/article/div/div/button')
+    done_btn.click()
+
+    time.sleep(5)
+    
     driver.quit()
 
     time.sleep(30)
