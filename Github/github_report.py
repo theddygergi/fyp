@@ -93,7 +93,7 @@ urls_to_report.send_keys("https://github.com/marcellehaddad/myfitnessandroid")
 sleep(rand_time())
 
 report_desc = driver.find_element(By.XPATH, '/html/body/main/restorable-form/trademark-policy/form/div[1]/dl[5]/dd[1]/textarea')
-report_desc.send_keys("This account stole my repository without asking for my permission. Please consider this reprort.")
+report_desc.send_keys("This account stole my repository without asking for my permission. Please consider this report.")
 
 sleep(rand_time())
 
