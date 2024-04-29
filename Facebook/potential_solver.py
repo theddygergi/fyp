@@ -15,7 +15,7 @@ audioToTextDelay = 10
 filename = '1.mp3'
 byPassUrl = 'https://www.google.com/recaptcha/api2/demo'
 
-option = webdriver.ChromeOptions()
+option = uc.ChromeOptions()
 option.add_argument('--disable-notifications')
 option.add_argument("--mute-audio")
 # option.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
