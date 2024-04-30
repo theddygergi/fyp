@@ -180,7 +180,17 @@ captcha_div.click()
 
 time.sleep(5)
 
-iframe_element1=driver.find_element(By.ID, 'rc-button goog-inline-block rc-button-audio')
-driver.switch_to.frame(iframe_element)
-audio_button=driver.find_element(By.CSS_SELECTOR, '#recaptcha-audio-button')
-audio_button.click()
+#try:
+#    iframe_element1 = WebDriverWait(driver, 10).until(
+#        EC.presence_of_element_located((By.CLASS_NAME, 'button-holder audio-button-holder'))
+#    )
+#    driver.switch_to.frame(iframe_element1)
+#    
+#    audio_button = driver.find_element(By.CSS_SELECTOR, '#recaptcha-audio-button')
+#    audio_button.click()
+#except Exception as e:
+#    print("An error occurred:", e)
+
+audiobutton = driver.find_element(By.XPATH, "/html/body/div/div/div[3]/div[2]/div[1]/div[1]/div[2]/button")
+audiobutton = driver.find_element(By.ID, "recaptcha-audio-button")
+audiobutton.click()   
