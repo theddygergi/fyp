@@ -55,3 +55,4 @@ def get_outlook_otp(username, password):
     else:
         return None
 
+print(get_outlook_otp("michael.me2@outlook.com", "random1$A"))
